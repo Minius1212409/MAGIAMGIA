@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mã Giảm Giá</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #code { margin-top: 20px; font-size: 1.2em; color: red; }
+        button { padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>MÃ giảm giá sẽ xuất hiện ở dưới. (Nguồn: Henry)</h1>
+    <button id="resetBtn">bấm vào để xem mã </button>
+    <div id="code">Mã code: Hiện chưa có. (Tuy nhiên mã sẽ xuất hiện bất ngờ ở bất cứ thời gian nào và sẽ mất sau 15 phút xuất hiện.)</div>
+
+    <script>
+        let discountCode = ''; // Biến để lưu mã giảm giá
+        let timeoutId; // Biến lưu timeout cho 15 phút
+
+        // Hàm hiển thị mã giảm giá mới
+        function showDiscountCode() {
+            discountCode = 'Chưa có'; // Mã giảm giá bạn muốn hiển thị
+            document.getElementById('code').innerText = `Mã code: ${discountCode}`;
+            // Sau 15 phút sẽ quay lại trạng thái ban đầu
+            timeoutId = setTimeout(resetDiscountCode, 15 * 60 * 1000);
+        }
+
+        // Hàm reset lại mã giảm giá về trạng thái ban đầu
+        function resetDiscountCode() {
+            discountCode = '';
+            document.getElementById('code').innerText = 'Mã code: Hiện chưa có. (Tuy nhiên mã sẽ xuất hiện bất ngờ ở bất cứ thời gian nào và sẽ mất sau 15 phút xuất hiện.)';
+        }
+
+        // Xử lý sự kiện khi bấm nút "Reset"
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            clearTimeout(timeoutId); // Xóa bỏ timeout cũ nếu có
+            resetDiscountCode(); // Đặt về trạng thái ban đầu
+            showDiscountCode(); // Hiển thị mã mới
+        });
+    </script>
+</body>
+</html>
